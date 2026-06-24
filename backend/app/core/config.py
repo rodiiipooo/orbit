@@ -14,7 +14,14 @@ class Settings(BaseSettings):
     redis_url: str = "redis://localhost:6379/0"
 
     anthropic_api_key: Optional[str] = None
-    replicate_api_token: Optional[str] = None
+
+    # Image generation — local diffusion endpoint (ComfyUI / A1111 / Diffusers)
+    # e.g. http://localhost:7860  (no trailing slash)
+    local_diffusion_url: Optional[str] = None
+
+    # Video generation — InVideo API (enterprise tier; optional)
+    # Without this key, the service returns a deep-link to invideo.io
+    invideo_api_key: Optional[str] = None
 
     twitter_client_id: Optional[str] = None
     twitter_client_secret: Optional[str] = None

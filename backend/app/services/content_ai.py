@@ -13,7 +13,10 @@ PLATFORM_CONSTRAINTS = {
 
 
 def _client() -> anthropic.Anthropic:
-    return anthropic.Anthropic(api_key=settings.anthropic_api_key)
+    return anthropic.Anthropic(
+        api_key=settings.anthropic_api_key,
+        default_headers={"anthropic-beta": "prompt-caching-2024-07-31"},
+    )
 
 
 async def generate_post(
@@ -52,7 +55,7 @@ async def generate_post(
     response = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=2048,
-        system=system,
+        system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
         messages=[{"role": "user", "content": user_prompt}],
     )
 

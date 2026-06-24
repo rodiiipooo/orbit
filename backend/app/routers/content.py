@@ -67,6 +67,13 @@ async def generate_post(req: GeneratePostRequest, user: User = Depends(get_curre
 
 @router.post("/generate-video-script")
 async def generate_video_script(req: GenerateVideoScriptRequest, user: User = Depends(get_current_user)):
+    """
+    1. Claude writes the script.
+    2. video_gen.request_video() routes to InVideo API (if key set)
+       or returns a pre-filled InVideo deep-link.
+    Response always includes the script; status="redirect" means
+    the frontend should open redirect_url in a new tab.
+    """
     try:
         script = await content_ai.generate_video_script(
             topic=req.topic,
@@ -74,7 +81,12 @@ async def generate_video_script(req: GenerateVideoScriptRequest, user: User = De
             style=req.style,
             platform=req.platform,
         )
-        return script
+        video_result = await video_gen.request_video(
+            script=script,
+            platform=req.platform,
+            duration_seconds=req.duration_seconds,
+        )
+        return {**script, "video": video_result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
