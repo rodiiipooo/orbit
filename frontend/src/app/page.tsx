@@ -54,6 +54,7 @@ export default function LandingPage() {
           <span className="font-bold text-lg">Orbit</span>
         </div>
         <div className="flex items-center gap-4">
+          <Link href="/about" className="btn-ghost text-sm">About</Link>
           <Link href="/auth/login" className="btn-ghost text-sm">Sign in</Link>
           <Link href="/auth/register" className="btn-primary text-sm">Start free</Link>
         </div>

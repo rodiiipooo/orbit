@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from .core.config import settings
 from .core.database import init_db
-from .routers import auth, content, schedule, analytics, platforms
+from .routers import auth, content, schedule, analytics, platforms, emails
 
 
 @asynccontextmanager
@@ -32,6 +32,7 @@ app.include_router(content.router, prefix="/api")
 app.include_router(schedule.router, prefix="/api")
 app.include_router(analytics.router, prefix="/api")
 app.include_router(platforms.router, prefix="/api")
+app.include_router(emails.router, prefix="/api")
 
 
 @app.get("/health")

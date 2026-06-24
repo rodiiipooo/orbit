@@ -1,0 +1,129 @@
+{
+  "company": {
+    "name": "Orbit",
+    "domain": "orbitmarketing.io",
+    "tagline": "Marketing that knows why it works.",
+    "founding_year": 2024,
+    "location": "Austin, TX",
+    "from_address": "team@orbitmarketing.io",
+    "reply_to": "hello@orbitmarketing.io"
+  },
+  "team": {
+    "founder": {
+      "id": "alex_rivera",
+      "name": "Alex Rivera",
+      "first_name": "Alex",
+      "title": "CEO & Founder",
+      "email": "alex@orbitmarketing.io",
+      "public": true,
+      "avatar_seed": "alex-rivera",
+      "bio": "I spent 10 years as Creative Director at Meridian Digital, managing social strategy for 40+ brand accounts. Every Monday was the same: six platforms, six dashboards, six sets of gut-feel guesses about what was working. I built Orbit to end that. Now I know exactly what drives results — and so do our users.",
+      "backstory": "NYU journalism → ad agency copywriter → CD → accidental SaaS founder. Still writes every welcome email himself.",
+      "voice": "direct, data-informed, zero fluff",
+      "social": {
+        "linkedin": "https://linkedin.com/in/alexrivera-orbit",
+        "twitter": "https://twitter.com/alexrivera_io"
+      },
+      "signing": "Alex Rivera\nFounder, Orbit\norbitmarketing.io"
+    },
+    "customer_success": {
+      "id": "jordan_lee",
+      "name": "Jordan Lee",
+      "first_name": "Jordan",
+      "title": "Head of Customer Success",
+      "email": "jordan@orbitmarketing.io",
+      "public": true,
+      "bio": "Spent 5 years in agency account management before joining Orbit. Obsessed with making sure every user actually gets results, not just access to a dashboard.",
+      "voice": "warm, practical, solution-focused",
+      "signing": "Jordan Lee\nCustomer Success, Orbit"
+    },
+    "growth": {
+      "id": "sam_park",
+      "name": "Sam Park",
+      "first_name": "Sam",
+      "title": "Head of Growth",
+      "email": "sam@orbitmarketing.io",
+      "public": false,
+      "voice": "concise, peer-to-peer, no hard sell",
+      "signing": "Sam Park\nGrowth, Orbit"
+    },
+    "product": {
+      "id": "casey_morgan",
+      "name": "Casey Morgan",
+      "first_name": "Casey",
+      "title": "Head of Product",
+      "email": "casey@orbitmarketing.io",
+      "public": false,
+      "voice": "curious, feature-focused, invites feedback",
+      "signing": "Casey Morgan\nProduct, Orbit"
+    }
+  },
+  "email_sequences": {
+    "onboarding_drip": [
+      {
+        "day": 0,
+        "id": "welcome",
+        "sender": "founder",
+        "subject": "Welcome to Orbit — a note from the founder",
+        "template": "welcome"
+      },
+      {
+        "day": 1,
+        "id": "day1_cs",
+        "sender": "customer_success",
+        "subject": "Quick question about your setup",
+        "template": "day1_checkin"
+      },
+      {
+        "day": 3,
+        "id": "day3_tip",
+        "sender": "founder",
+        "subject": "The one thing that 3x'd our users' engagement",
+        "template": "day3_tip"
+      },
+      {
+        "day": 7,
+        "id": "day7_cs",
+        "sender": "customer_success",
+        "subject": "How's Orbit working for you?",
+        "template": "day7_checkin"
+      },
+      {
+        "day": 14,
+        "id": "day14_feature",
+        "sender": "product",
+        "subject": "Have you tried Causal Insights yet?",
+        "template": "day14_causal"
+      },
+      {
+        "day": 30,
+        "id": "day30_upgrade",
+        "sender": "growth",
+        "subject": "Your first month on Orbit",
+        "template": "day30_upgrade"
+      }
+    ],
+    "cold_outreach": [
+      {
+        "step": 1,
+        "sender": "founder",
+        "subject": "I built the thing I wish existed",
+        "template": "cold_1_founder_story"
+      },
+      {
+        "step": 2,
+        "delay_days": 3,
+        "sender": "growth",
+        "subject": "What {{company}} is missing (data point)",
+        "template": "cold_2_social_proof"
+      },
+      {
+        "step": 3,
+        "delay_days": 7,
+        "sender": "customer_success",
+        "subject": "Free strategy session — no strings",
+        "template": "cold_3_session_offer"
+      }
+    ]
+  }
+}

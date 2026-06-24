@@ -28,6 +28,10 @@ celery.conf.update(
             "task": "orbit.workers.tasks.run_causal_analysis",
             "schedule": crontab(minute=0, hour=3),  # 3am daily
         },
+        "send-drip-emails": {
+            "task": "orbit.workers.tasks.send_drip_emails",
+            "schedule": crontab(minute=0, hour=9),  # 9am daily
+        },
     },
 )
 
@@ -103,6 +107,60 @@ def run_causal_analysis():
                         **{k: ins[k] for k in
                            ["treatment", "outcome", "ate", "ci_lower", "ci_upper", "p_value", "method", "interpretation"]}
                     ))
+            await db.commit()
+
+    asyncio.run(_run())
+
+
+@celery.task(name="orbit.workers.tasks.send_drip_emails")
+def send_drip_emails():
+    """9am daily: send the next drip email to every enrolled user who is due."""
+    import asyncio
+    from ..core.database import AsyncSessionLocal
+    from ..models.user import User
+    from ..models.email_log import DripEnrollment, EmailLog
+    from ..services.email_agent import send_template, persona
+    from sqlalchemy import select
+    from datetime import datetime, timezone
+
+    drip = persona()["email_sequences"]["onboarding_drip"]
+
+    async def _run():
+        async with AsyncSessionLocal() as db:
+            rows = await db.execute(
+                select(DripEnrollment, User)
+                .join(User, User.id == DripEnrollment.user_id)
+                .where(DripEnrollment.unsubscribed == False)
+            )
+            for enrollment, user in rows:
+                days_since = (datetime.now(timezone.utc) - enrollment.enrolled_at).days
+                pending = [
+                    step for step in drip
+                    if step["day"] <= days_since and step["day"] > enrollment.last_step_sent
+                ]
+                for step in sorted(pending, key=lambda s: s["day"]):
+                    try:
+                        recipient = {
+                            "email": user.email,
+                            "full_name": user.full_name or user.email.split("@")[0],
+                            "first_name": (user.full_name or user.email).split()[0],
+                            "company": user.company or "",
+                        }
+                        sent = await send_template(step["template"], recipient)
+                        db.add(EmailLog(
+                            user_id=user.id,
+                            to_email=user.email,
+                            to_name=user.full_name or "",
+                            from_email="team@orbitmarketing.io",
+                            subject=sent["subject"],
+                            template_id=step["template"],
+                            category="drip",
+                            resend_id=sent["send_result"].get("id", ""),
+                        ))
+                        enrollment.last_step_sent = step["day"]
+                        enrollment.last_sent_at = datetime.now(timezone.utc)
+                    except Exception as e:
+                        print(f"[drip] user {user.id} step {step['day']}: {e}")
             await db.commit()
 
     asyncio.run(_run())

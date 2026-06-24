@@ -65,6 +65,23 @@ async def register(req: RegisterRequest, db: AsyncSession = Depends(get_db)):
     db.add(user)
     await db.commit()
     await db.refresh(user)
+
+    # Enroll in drip sequence and send welcome email (best-effort)
+    try:
+        from ..models.email_log import DripEnrollment
+        from ..services.email_agent import send_template
+        db.add(DripEnrollment(user_id=user.id))
+        await db.commit()
+        recipient = {
+            "email": user.email,
+            "full_name": user.full_name or user.email.split("@")[0],
+            "first_name": (user.full_name or user.email).split()[0],
+            "company": user.company or "",
+        }
+        await send_template("welcome", recipient)
+    except Exception:
+        pass  # never block registration on email failure
+
     token_data = {"sub": str(user.id)}
     return TokenResponse(
         access_token=create_access_token(token_data),

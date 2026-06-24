@@ -23,6 +23,9 @@ class Settings(BaseSettings):
     # Without this key, the service returns a deep-link to invideo.io
     invideo_api_key: Optional[str] = None
 
+    # Email (Resend — resend.com)
+    resend_api_key: Optional[str] = None
+
     twitter_client_id: Optional[str] = None
     twitter_client_secret: Optional[str] = None
     linkedin_client_id: Optional[str] = None
