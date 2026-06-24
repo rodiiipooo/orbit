@@ -59,20 +59,20 @@ export default function AnalyticsPage() {
     : [];
 
   return (
-    <div className="flex min-h-screen bg-gray-950">
+    <div className="flex min-h-screen bg-[#080810]">
       <Sidebar />
       <div className="flex-1 p-8 max-w-7xl">
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-bold text-white">Analytics</h1>
-            <p className="text-gray-400 text-sm mt-1">Performance insights + causal drivers</p>
+            <p className="text-white/50 text-sm mt-1">Performance insights + causal drivers</p>
           </div>
-          <div className="flex gap-1 bg-gray-900 border border-gray-800 rounded-lg p-1">
+          <div className="flex gap-1 bg-white/[0.03] border border-white/[0.06] rounded-lg p-1">
             {DAYS_OPTIONS.map(d => (
               <button
                 key={d}
                 onClick={() => handleDaysChange(d)}
-                className={`px-3 py-1.5 rounded text-sm transition-all ${days === d ? "bg-brand-500 text-white" : "text-gray-400 hover:text-white"}`}
+                className={`px-3 py-1.5 rounded text-sm transition-all ${days === d ? "bg-indigo-600 text-white" : "text-white/50 hover:text-white"}`}
               >
                 {d}d
               </button>
@@ -81,7 +81,7 @@ export default function AnalyticsPage() {
         </div>
 
         {loading ? (
-          <div className="flex justify-center py-20"><div className="w-8 h-8 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" /></div>
+          <div className="flex justify-center py-20"><div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" /></div>
         ) : (
           <div className="space-y-8">
             {/* Stats row */}
@@ -93,7 +93,7 @@ export default function AnalyticsPage() {
                 { label: "Eng. Rate", value: formatPct(overview?.engagement_rate_pct || 0) },
               ].map(s => (
                 <div key={s.label} className="stat-card">
-                  <div className="text-gray-400 text-sm">{s.label}</div>
+                  <div className="text-white/50 text-sm">{s.label}</div>
                   <div className="text-2xl font-bold text-white">{s.value}</div>
                 </div>
               ))}
@@ -117,7 +117,7 @@ export default function AnalyticsPage() {
                     </BarChart>
                   </ResponsiveContainer>
                 ) : (
-                  <div className="flex items-center justify-center h-40 text-gray-500 text-sm">No data yet</div>
+                  <div className="flex items-center justify-center h-40 text-white/35 text-sm">No data yet</div>
                 )}
               </div>
 
@@ -127,16 +127,16 @@ export default function AnalyticsPage() {
                   <div className="space-y-3">
                     {topPosts.map((p: any, i) => (
                       <div key={p.id} className="flex items-start gap-3">
-                        <span className="text-lg font-bold text-gray-700 w-6">{i + 1}</span>
+                        <span className="text-lg font-bold text-white/25 w-6">{i + 1}</span>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm text-white line-clamp-1">{p.body}</p>
-                          <p className="text-xs text-gray-500 mt-0.5">{formatNumber(p.score)} engagements</p>
+                          <p className="text-xs text-white/35 mt-0.5">{formatNumber(p.score)} engagements</p>
                         </div>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="flex items-center justify-center h-40 text-gray-500 text-sm">No published posts yet</div>
+                  <div className="flex items-center justify-center h-40 text-white/35 text-sm">No published posts yet</div>
                 )}
               </div>
             </div>
@@ -145,10 +145,10 @@ export default function AnalyticsPage() {
             <div className="card">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2">
-                  <Brain className="w-5 h-5 text-brand-400" />
+                  <Brain className="w-5 h-5 text-indigo-400" />
                   <div>
                     <h2 className="font-semibold text-white">Causal Inference Insights</h2>
-                    <p className="text-xs text-gray-500 mt-0.5">What actually CAUSES changes in your outcomes, not just correlates</p>
+                    <p className="text-xs text-white/35 mt-0.5">What actually CAUSES changes in your outcomes, not just correlates</p>
                   </div>
                 </div>
                 <button
@@ -162,15 +162,15 @@ export default function AnalyticsPage() {
               </div>
 
               {insights.length === 0 ? (
-                <div className="text-center py-10 text-gray-500">
-                  <Brain className="w-10 h-10 text-gray-700 mx-auto mb-3" />
+                <div className="text-center py-10 text-white/35">
+                  <Brain className="w-10 h-10 text-white/25 mx-auto mb-3" />
                   <p className="text-sm mb-1">Need 30+ published posts to run causal analysis</p>
-                  <p className="text-xs text-gray-600">Keep posting — insights will appear automatically</p>
+                  <p className="text-xs text-white/30">Keep posting — insights will appear automatically</p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {insights.map((ins: any) => (
-                    <div key={ins.treatment} className="p-4 bg-gray-800 rounded-xl border border-gray-700 hover:border-gray-600 transition-colors">
+                    <div key={ins.treatment} className="p-4 bg-white/[0.04] rounded-xl border border-white/[0.08] hover:border-white/[0.12] transition-colors">
                       <div className="flex items-start justify-between gap-4 mb-3">
                         <div className="flex items-center gap-2">
                           {ins.significant
@@ -186,15 +186,15 @@ export default function AnalyticsPage() {
                             <div className={`text-lg font-bold ${ins.ate > 0 ? "text-green-400" : "text-red-400"}`}>
                               {ins.ate > 0 ? "+" : ""}{ins.ate.toFixed(1)}
                             </div>
-                            <div className="text-xs text-gray-500">ATE on {ins.outcome}</div>
+                            <div className="text-xs text-white/35">ATE on {ins.outcome}</div>
                           </div>
-                          <span className={`badge text-xs ${ins.significant ? "bg-green-500/10 text-green-400 border border-green-500/20" : "bg-gray-700 text-gray-400"}`}>
+                          <span className={`badge text-xs ${ins.significant ? "bg-green-500/10 text-green-400 border border-green-500/20" : "bg-white/[0.06] text-white/50"}`}>
                             p={ins.p_value.toFixed(3)}
                           </span>
                         </div>
                       </div>
-                      <p className="text-sm text-gray-300 leading-relaxed">{ins.interpretation}</p>
-                      <div className="flex items-center gap-4 mt-3 pt-3 border-t border-gray-700 text-xs text-gray-500">
+                      <p className="text-sm text-white/70 leading-relaxed">{ins.interpretation}</p>
+                      <div className="flex items-center gap-4 mt-3 pt-3 border-t border-white/[0.08] text-xs text-white/35">
                         <span>95% CI: [{ins.ci_lower.toFixed(1)}, {ins.ci_upper.toFixed(1)}]</span>
                         <span>Method: {ins.method}</span>
                         <span className="capitalize">{ins.outcome.replace(/_/g, " ")}</span>

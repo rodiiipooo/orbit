@@ -65,10 +65,10 @@ function Avatar({ initials, color, size = 64 }: { initials: string; color: strin
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
-      <nav className="border-b border-gray-800 px-6 py-4 flex items-center justify-between max-w-7xl mx-auto">
+    <div className="min-h-screen bg-[#080810] text-white">
+      <nav className="border-b border-white/[0.06] px-6 py-4 flex items-center justify-between max-w-7xl mx-auto">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center font-bold text-sm">O</div>
+          <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-sm">O</div>
           <span className="font-bold text-lg">Orbit</span>
         </Link>
         <div className="flex items-center gap-4">
@@ -82,14 +82,14 @@ export default function AboutPage() {
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
             Built by someone who got tired of guessing
           </h1>
-          <p className="text-xl text-gray-400 leading-relaxed max-w-2xl">
+          <p className="text-xl text-white/50 leading-relaxed max-w-2xl">
             Orbit started as an internal tool at an agency. When it started working better than everything we were paying for, we turned it into a product.
           </p>
         </motion.div>
 
         {/* Founder */}
         <section className="mb-20">
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-8">Founder</h2>
+          <h2 className="text-sm font-semibold text-white/35 uppercase tracking-widest mb-8">Founder</h2>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -101,23 +101,23 @@ export default function AboutPage() {
               <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                 <div>
                   <h3 className="text-xl font-bold text-white">{FOUNDER.name}</h3>
-                  <p className="text-brand-400 text-sm font-medium">{FOUNDER.title}</p>
-                  <p className="text-gray-500 text-xs mt-1">{FOUNDER.backstory}</p>
+                  <p className="text-indigo-400 text-sm font-medium">{FOUNDER.title}</p>
+                  <p className="text-white/35 text-xs mt-1">{FOUNDER.backstory}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <a href={FOUNDER.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white">
+                  <a href={FOUNDER.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-white/[0.04] rounded-lg transition-colors text-white/50 hover:text-white">
                     <Linkedin className="w-4 h-4" />
                   </a>
-                  <a href={FOUNDER.twitter} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white">
+                  <a href={FOUNDER.twitter} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-white/[0.04] rounded-lg transition-colors text-white/50 hover:text-white">
                     <Twitter className="w-4 h-4" />
                   </a>
-                  <a href={`mailto:${FOUNDER.email}`} className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white">
+                  <a href={`mailto:${FOUNDER.email}`} className="p-2 hover:bg-white/[0.04] rounded-lg transition-colors text-white/50 hover:text-white">
                     <Mail className="w-4 h-4" />
                   </a>
                 </div>
               </div>
               {FOUNDER.bio_paras.map((p, i) => (
-                <p key={i} className="text-gray-300 leading-relaxed mb-3 last:mb-0">{p}</p>
+                <p key={i} className="text-white/70 leading-relaxed mb-3 last:mb-0">{p}</p>
               ))}
             </div>
           </motion.div>
@@ -125,7 +125,7 @@ export default function AboutPage() {
 
         {/* Team */}
         <section className="mb-20">
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-8">Team</h2>
+          <h2 className="text-sm font-semibold text-white/35 uppercase tracking-widest mb-8">Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {TEAM.map((member, i) => (
               <motion.div
@@ -139,12 +139,12 @@ export default function AboutPage() {
                 <div className="min-w-0">
                   <div className="flex items-center justify-between mb-1">
                     <h3 className="font-semibold text-white">{member.name}</h3>
-                    <a href={`mailto:${member.email}`} className="p-1.5 hover:bg-gray-800 rounded transition-colors text-gray-500 hover:text-gray-300">
+                    <a href={`mailto:${member.email}`} className="p-1.5 hover:bg-white/[0.04] rounded transition-colors text-white/35 hover:text-white/70">
                       <Mail className="w-3.5 h-3.5" />
                     </a>
                   </div>
-                  <p className="text-brand-400 text-xs font-medium mb-2">{member.title}</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">{member.bio}</p>
+                  <p className="text-indigo-400 text-xs font-medium mb-2">{member.title}</p>
+                  <p className="text-white/50 text-sm leading-relaxed">{member.bio}</p>
                 </div>
               </motion.div>
             ))}
@@ -153,7 +153,7 @@ export default function AboutPage() {
 
         {/* Values */}
         <section className="mb-20">
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-8">What we believe</h2>
+          <h2 className="text-sm font-semibold text-white/35 uppercase tracking-widest mb-8">What we believe</h2>
           <div className="space-y-6">
             {VALUES.map((v, i) => (
               <motion.div
@@ -161,12 +161,12 @@ export default function AboutPage() {
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 + i * 0.1 }}
-                className="flex gap-6 p-6 bg-gray-900 border border-gray-800 rounded-xl hover:border-gray-700 transition-colors"
+                className="flex gap-6 p-6 bg-white/[0.03] border border-white/[0.06] rounded-xl hover:border-white/[0.08] transition-colors"
               >
-                <div className="w-0.5 bg-brand-500 rounded-full flex-shrink-0" />
+                <div className="w-0.5 bg-indigo-600 rounded-full flex-shrink-0" />
                 <div>
                   <h3 className="font-semibold text-white mb-2">{v.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{v.body}</p>
+                  <p className="text-white/50 text-sm leading-relaxed">{v.body}</p>
                 </div>
               </motion.div>
             ))}
@@ -174,9 +174,9 @@ export default function AboutPage() {
         </section>
 
         {/* Contact CTA */}
-        <section className="card bg-brand-500/5 border-brand-500/20 text-center py-12">
+        <section className="card bg-indigo-500/5 border-indigo-500/20 text-center py-12">
           <h2 className="text-2xl font-bold text-white mb-3">Talk to a human</h2>
-          <p className="text-gray-400 mb-6 max-w-md mx-auto">
+          <p className="text-white/50 mb-6 max-w-md mx-auto">
             Questions about Orbit? Want to see a demo? Jordan or Alex will reply personally.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -191,9 +191,9 @@ export default function AboutPage() {
         </section>
       </div>
 
-      <footer className="border-t border-gray-800 py-8 text-center text-gray-500 text-sm">
+      <footer className="border-t border-white/[0.06] py-8 text-center text-white/35 text-sm">
         © 2025 Orbit Marketing, Inc. · Austin, TX ·{" "}
-        <Link href="/" className="hover:text-gray-300">Home</Link>
+        <Link href="/" className="hover:text-white/70">Home</Link>
       </footer>
     </div>
   );

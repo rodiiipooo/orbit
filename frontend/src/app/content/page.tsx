@@ -19,9 +19,9 @@ function CopyButton({ text }: { text: string }) {
   return (
     <button
       onClick={() => { navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
-      className="p-1.5 rounded hover:bg-gray-700 transition-colors"
+      className="p-1.5 rounded hover:bg-white/[0.06] transition-colors"
     >
-      {copied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5 text-gray-400" />}
+      {copied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5 text-white/50" />}
     </button>
   );
 }
@@ -101,21 +101,21 @@ export default function ContentPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-950">
+    <div className="flex min-h-screen bg-[#080810]">
       <Sidebar />
       <div className="flex-1 p-8 max-w-5xl">
         <h1 className="text-2xl font-bold text-white mb-2">Content Studio</h1>
-        <p className="text-gray-400 text-sm mb-8">AI-powered content creation for every platform</p>
+        <p className="text-white/50 text-sm mb-8">AI-powered content creation for every platform</p>
 
         {/* Tabs */}
-        <div className="flex gap-1 bg-gray-900 border border-gray-800 rounded-xl p-1 mb-8 w-fit">
+        <div className="flex gap-1 bg-white/[0.03] border border-white/[0.06] rounded-xl p-1 mb-8 w-fit">
           {TABS.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               onClick={() => { setTab(id); setResult(null); }}
               className={cn(
                 "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
-                tab === id ? "bg-brand-500 text-white" : "text-gray-400 hover:text-white hover:bg-gray-800"
+                tab === id ? "bg-indigo-600 text-white" : "text-white/50 hover:text-white hover:bg-white/[0.04]"
               )}
             >
               <Icon className="w-4 h-4" />{label}
@@ -144,7 +144,7 @@ export default function ContentPage() {
                       <button
                         key={p}
                         onClick={() => setPlatform(p)}
-                        className={cn("btn-secondary text-xs px-3 py-1.5 capitalize", platform === p && "bg-brand-500 text-white border-brand-500")}
+                        className={cn("btn-secondary text-xs px-3 py-1.5 capitalize", platform === p && "bg-indigo-600 text-white border-indigo-500")}
                       >
                         {p}
                       </button>
@@ -158,7 +158,7 @@ export default function ContentPage() {
                       <button
                         key={t}
                         onClick={() => setTone(t)}
-                        className={cn("btn-secondary text-xs px-3 py-1.5 capitalize", tone === t && "bg-brand-500 text-white")}
+                        className={cn("btn-secondary text-xs px-3 py-1.5 capitalize", tone === t && "bg-indigo-600 text-white")}
                       >
                         {t}
                       </button>
@@ -167,7 +167,7 @@ export default function ContentPage() {
                 </div>
                 <div>
                   <label className="label">Variants: {numVariants}</label>
-                  <input type="range" min={1} max={5} value={numVariants} onChange={e => setNumVariants(+e.target.value)} className="w-full accent-brand-500" />
+                  <input type="range" min={1} max={5} value={numVariants} onChange={e => setNumVariants(+e.target.value)} className="w-full accent-indigo-500" />
                 </div>
                 <button onClick={handleGeneratePost} disabled={loading} className="btn-primary w-full flex items-center justify-center gap-2">
                   {loading ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Wand2 className="w-4 h-4" />}
@@ -198,7 +198,7 @@ export default function ContentPage() {
                   <label className="label">Style</label>
                   <div className="flex flex-wrap gap-2">
                     {["educational", "entertaining", "storytelling", "tutorial", "motivational"].map(s => (
-                      <button key={s} onClick={() => setStyle(s)} className={cn("btn-secondary text-xs px-3 py-1.5 capitalize", style === s && "bg-brand-500 text-white")}>{s}</button>
+                      <button key={s} onClick={() => setStyle(s)} className={cn("btn-secondary text-xs px-3 py-1.5 capitalize", style === s && "bg-indigo-600 text-white")}>{s}</button>
                     ))}
                   </div>
                 </div>
@@ -228,7 +228,7 @@ export default function ContentPage() {
                       <button
                         key={p}
                         onClick={() => setTargetPlatforms(prev => prev.includes(p) ? prev.filter(x => x !== p) : [...prev, p])}
-                        className={cn("btn-secondary text-xs px-3 py-1.5 capitalize", targetPlatforms.includes(p) && "bg-brand-500 text-white")}
+                        className={cn("btn-secondary text-xs px-3 py-1.5 capitalize", targetPlatforms.includes(p) && "bg-indigo-600 text-white")}
                       >
                         {p}
                       </button>
@@ -271,8 +271,8 @@ export default function ContentPage() {
             {loading && (
               <div className="card flex items-center justify-center h-48">
                 <div className="text-center">
-                  <div className="w-8 h-8 border-2 border-brand-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-                  <p className="text-gray-400 text-sm">Generating with Claude...</p>
+                  <div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+                  <p className="text-white/50 text-sm">Generating with Claude...</p>
                 </div>
               </div>
             )}
@@ -280,11 +280,11 @@ export default function ContentPage() {
             {result?.type === "post" && result.data.map((v: any, i: number) => (
               <div key={i} className="card space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500 font-medium">Variant {i + 1}</span>
+                  <span className="text-xs text-white/35 font-medium">Variant {i + 1}</span>
                   <div className="flex gap-1">
                     <CopyButton text={v.body} />
-                    <button onClick={() => scheduleVariant(v.body, v.hashtags)} className="p-1.5 rounded hover:bg-gray-700 transition-colors" title="Save to drafts">
-                      <Calendar className="w-3.5 h-3.5 text-gray-400" />
+                    <button onClick={() => scheduleVariant(v.body, v.hashtags)} className="p-1.5 rounded hover:bg-white/[0.06] transition-colors" title="Save to drafts">
+                      <Calendar className="w-3.5 h-3.5 text-white/50" />
                     </button>
                   </div>
                 </div>
@@ -292,11 +292,11 @@ export default function ContentPage() {
                 {v.hashtags?.length > 0 && (
                   <div className="flex flex-wrap gap-1">
                     {v.hashtags.map((h: string) => (
-                      <span key={h} className="text-xs text-brand-400 bg-brand-500/10 rounded px-2 py-0.5">#{h}</span>
+                      <span key={h} className="text-xs text-indigo-400 bg-indigo-500/10 rounded px-2 py-0.5">#{h}</span>
                     ))}
                   </div>
                 )}
-                <div className="flex items-center justify-between text-xs text-gray-500 pt-1 border-t border-gray-800">
+                <div className="flex items-center justify-between text-xs text-white/35 pt-1 border-t border-white/[0.06]">
                   <span>{v.hook}</span>
                   <span>{v.best_time}</span>
                 </div>
@@ -306,28 +306,28 @@ export default function ContentPage() {
             {result?.type === "video" && (
               <div className="card space-y-4">
                 <h3 className="font-semibold text-white">{result.data.title}</h3>
-                <div className="p-3 bg-gray-800 rounded-lg">
-                  <div className="text-xs text-brand-400 font-medium mb-1">Hook (0-3s)</div>
+                <div className="p-3 bg-white/[0.04] rounded-lg">
+                  <div className="text-xs text-indigo-400 font-medium mb-1">Hook (0-3s)</div>
                   <p className="text-sm text-white">{result.data.hook}</p>
                 </div>
                 <div className="space-y-2">
                   {result.data.scenes?.map((s: any, i: number) => (
                     <div key={i} className="flex gap-3 text-sm">
-                      <span className="text-gray-500 text-xs w-12 flex-shrink-0 mt-0.5">{s.time_marker}</span>
+                      <span className="text-white/35 text-xs w-12 flex-shrink-0 mt-0.5">{s.time_marker}</span>
                       <div>
-                        <div className="text-gray-400 text-xs">{s.action}</div>
+                        <div className="text-white/50 text-xs">{s.action}</div>
                         <div className="text-white">{s.dialogue}</div>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="p-3 bg-brand-500/10 rounded-lg border border-brand-500/20">
-                  <div className="text-xs text-brand-400 font-medium mb-1">CTA</div>
+                <div className="p-3 bg-indigo-500/10 rounded-lg border border-indigo-500/20">
+                  <div className="text-xs text-indigo-400 font-medium mb-1">CTA</div>
                   <p className="text-sm text-white">{result.data.cta}</p>
                 </div>
                 <div>
-                  <div className="text-xs text-gray-500 mb-1">Caption</div>
-                  <p className="text-sm text-gray-300">{result.data.caption}</p>
+                  <div className="text-xs text-white/35 mb-1">Caption</div>
+                  <p className="text-sm text-white/70">{result.data.caption}</p>
                 </div>
               </div>
             )}
@@ -342,11 +342,11 @@ export default function ContentPage() {
                 {v.hashtags?.length > 0 && (
                   <div className="flex flex-wrap gap-1">
                     {v.hashtags.map((h: string) => (
-                      <span key={h} className="text-xs text-brand-400">#{h}</span>
+                      <span key={h} className="text-xs text-indigo-400">#{h}</span>
                     ))}
                   </div>
                 )}
-                <p className="text-xs text-gray-500 italic">{v.adaptation_notes}</p>
+                <p className="text-xs text-white/35 italic">{v.adaptation_notes}</p>
               </div>
             ))}
 
@@ -355,7 +355,7 @@ export default function ContentPage() {
                 {result.data.url ? (
                   <img src={result.data.url} alt="Generated banner" className="w-full rounded-lg" />
                 ) : (
-                  <div className="text-center py-8 text-gray-400 text-sm">
+                  <div className="text-center py-8 text-white/50 text-sm">
                     {result.data.status === "no_api_key" ? "Add REPLICATE_API_TOKEN to enable image generation" : result.data.status}
                   </div>
                 )}
@@ -365,8 +365,8 @@ export default function ContentPage() {
             {!result && !loading && (
               <div className="card flex items-center justify-center h-48 text-center">
                 <div>
-                  <Wand2 className="w-8 h-8 text-gray-700 mx-auto mb-3" />
-                  <p className="text-gray-500 text-sm">Your generated content will appear here</p>
+                  <Wand2 className="w-8 h-8 text-white/25 mx-auto mb-3" />
+                  <p className="text-white/35 text-sm">Your generated content will appear here</p>
                 </div>
               </div>
             )}

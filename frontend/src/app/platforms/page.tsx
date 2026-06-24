@@ -76,14 +76,14 @@ export default function PlatformsPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-950">
+    <div className="flex min-h-screen bg-[#080810]">
       <Sidebar />
       <div className="flex-1 p-8 max-w-4xl">
         <h1 className="text-2xl font-bold text-white mb-2">Platforms</h1>
-        <p className="text-gray-400 text-sm mb-8">Connect your social media accounts to start scheduling</p>
+        <p className="text-white/50 text-sm mb-8">Connect your social media accounts to start scheduling</p>
 
         {loading ? (
-          <div className="flex justify-center py-20"><div className="w-6 h-6 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" /></div>
+          <div className="flex justify-center py-20"><div className="w-6 h-6 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" /></div>
         ) : (
           <div className="space-y-4">
             {Object.entries(PLATFORM_INFO).map(([platform, info]) => {
@@ -102,9 +102,9 @@ export default function PlatformsPage() {
                         <span className="font-semibold text-white">{info.name}</span>
                         {conn && <CheckCircle className="w-4 h-4 text-green-400" />}
                       </div>
-                      <p className="text-sm text-gray-400">{info.description}</p>
+                      <p className="text-sm text-white/50">{info.description}</p>
                       {conn && (
-                        <p className="text-xs text-gray-500 mt-1">Connected as @{conn.platform_username}</p>
+                        <p className="text-xs text-white/35 mt-1">Connected as @{conn.platform_username}</p>
                       )}
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
@@ -124,10 +124,10 @@ export default function PlatformsPage() {
                   </div>
 
                   {manualOpen === platform && !conn && (
-                    <div className="mt-4 p-4 bg-gray-800 rounded-lg space-y-3 border border-gray-700">
-                      <p className="text-xs text-gray-400">
+                    <div className="mt-4 p-4 bg-white/[0.04] rounded-lg space-y-3 border border-white/[0.08]">
+                      <p className="text-xs text-white/50">
                         Enter your {info.name} API access token to connect manually.
-                        In production, OAuth flow redirects to <code className="text-brand-400">{info.authUrl}</code>.
+                        In production, OAuth flow redirects to <code className="text-indigo-400">{info.authUrl}</code>.
                       </p>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
